@@ -1,17 +1,30 @@
 buildscript {
   repositories {
     jcenter()
+    mavenCentral()
   }
   dependencies {
     classpath "io.ratpack:ratpack-gradle:1.3.3"
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE"
   }
 }
 
 apply plugin: "io.ratpack.ratpack-groovy"
+apply plugin: "spring-boot"
+apply plugin: "java"
+
+jar {
+  baseName = 'gs-securing-web'
+  version =  '0.1.0'
+}
 
 repositories {
   jcenter()
+  mavenCentral()
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 mainClassName = "Main"
 
@@ -19,6 +32,12 @@ dependencies {
   runtime "org.slf4j:slf4j-simple:1.7.12"
   compile "com.heroku.sdk:heroku-jdbc:0.1.1"
   compile "org.postgresql:postgresql:9.4-1201-jdbc4"
+  compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+  compile "org.springframework.boot:spring-boot-starter-web"
+  compile "org.springframework.boot:spring-boot-starter-security"
+  testCompile"junit:junit"
+  testCompile"org.springframework.boot:spring-boot-starter-test"
+  testCompile"org.springframework.security:spring-security-test"
 }
 
 task stage {
