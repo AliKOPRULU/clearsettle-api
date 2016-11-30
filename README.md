@@ -1,22 +1,15 @@
 # Clearsettle API
 
 MERCHANT LOGIN
-
 TRANSACTION REPORT
-
 TRANSACTION QUERY
-
 GET TRANSACTION
-
 GET CLIENT
-
 GET MERCHANT
 
 
 Interface Future<V> : A Future represents the result of an asynchronous computation.
-
 Class Optional<T> : A container object which may or may not contain a non-null value.
-
 Stream() : A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get() will return the value. 
 
 ## APPENDIX
