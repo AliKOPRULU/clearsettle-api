@@ -7,11 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class TransactionReport {
-
-    private Integer merhant;
-
-    private Integer acquirer;
+public class TransactionReportRequest {//Post parameters
 
     @NotEmpty
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -22,4 +18,9 @@ public class TransactionReport {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String toDate;
+
+    private Integer merchant;
+
+    private Integer acquirer;
+
 }

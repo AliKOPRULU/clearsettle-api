@@ -30,3 +30,6 @@ Characters :
 
 - [ISO 8859-1](http://sites.utoronto.ca/webdocs/HTMLdocs/NewHTML/iso_table.html)
 
+##Not:
+TransactionQuery:Parametre Detayları; status, operation, paymentMethod, errorCode, filterField, Enum kullanılabilirdi yalnız, verilenler tamamı mı bilinmiyor, Char limit 8-10 kat fazla, şimdilik pas geçildi. 
+
