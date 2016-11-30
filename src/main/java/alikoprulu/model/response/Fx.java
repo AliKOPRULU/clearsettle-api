@@ -5,4 +5,11 @@ package alikoprulu.model.response;
  */
 public class Fx {//Foreign Exchange  USD | TL
 
+    //Dizi olacak burası değişecek
+
+    private String originalAmount;
+
+    private String originalCurrency;
+
+
 }

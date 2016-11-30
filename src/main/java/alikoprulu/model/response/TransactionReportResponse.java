@@ -1,5 +1,7 @@
 package alikoprulu.model.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -11,7 +13,8 @@ public class TransactionReportResponse {
     @Size(max = 64)
     private String status;
 
-    private List<TransactionReport> transactionReports;
+    @JsonProperty("response")
+    private List<TransactionReport> transactionReportList;
 
     public String getStatus() {
         return status;
@@ -21,11 +24,11 @@ public class TransactionReportResponse {
         this.status = status;
     }
 
-    public List<TransactionReport> getTransactionReports() {
-        return transactionReports;
+    public List<TransactionReport> getTransactionReportList() {
+        return transactionReportList;
     }
 
-    public void setTransactionReports(List<TransactionReport> transactionReports) {
-        this.transactionReports = transactionReports;
+    public void setTransactionReportList(List<TransactionReport> transactionReportList) {
+        this.transactionReportList = transactionReportList;
     }
 }
