@@ -7,6 +7,10 @@ public class Token {//Token is valid for 10 minutes.
 
     private String token;
 
+    public Token(){
+        super();
+    }
+
     public String getToken() {
         return token;
     }

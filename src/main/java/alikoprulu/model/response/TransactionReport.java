@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class TransactionReport {//Response parameters - Response List
+public class TransactionReport {//Response parameters -> ResponseList
 
     private Integer count;
 

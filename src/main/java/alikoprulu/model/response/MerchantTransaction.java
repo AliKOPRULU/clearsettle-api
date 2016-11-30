@@ -20,5 +20,55 @@ public class MerchantTransaction {
 
     private String transactionId;
 
+    public MerchantTransaction(){
+        super();
+    }
 
+    public String getReferenceNo() {
+        return referenceNo;
+    }
+
+    public void setReferenceNo(String referenceNo) {
+        this.referenceNo = referenceNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
 }
