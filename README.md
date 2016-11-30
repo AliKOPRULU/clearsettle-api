@@ -1,38 +1,33 @@
-# gradle-getting-started
+# Clearsettle API
 
-A barebones Gradle app, which can easily be deployed to Heroku.
+MERCHANT LOGIN
+TRANSACTION REPORT
+TRANSACTION QUERY
+GET TRANSACTION
+GET CLIENT
+GET MERCHANT
 
-This application support the [Getting Started with Gradle on Heroku](https://devcenter.heroku.com/articles/getting-started-with-gradle-on-heroku) article - check it out.
 
-## Running Locally
 
-Make sure you have Java installed.  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+Interface Future<V> : A Future represents the result of an asynchronous computation.
+Class Optional<T> : A container object which may or may not contain a non-null value.
+Stream() : A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get() will return the value. 
 
-```sh
-$ git clone https://github.com/heroku/gradle-getting-started.git
-$ cd gradle-getting-started
-$ ./gradlew stage
-$ heroku local web
-```
+## APPENDIX
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+PSP API :
 
-If you're going to use a database, ensure you have a local `.env` file that reads something like this:
+- [PSP API Function Reference](http://docs.raima.com/rdm/current/C_UG/Content/PSPUG/PSPAPIReference.htm)
 
-```
-DATABASE_URL=postgres://localhost:5432/gradle_database_name
-```
+Currency : 
 
-## Deploying to Heroku
+- [ISO 4217](http://www.xe.com/iso4217.php)
 
-```sh
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
+Country code :
 
-## Documentation
+- [ISO 3166-1 alpha-3](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
 
-For more information about using Java on Heroku, see these Dev Center articles:
+Characters :
 
-- [Java on Heroku](https://devcenter.heroku.com/categories/java)
+- [ISO 8859-1](http://sites.utoronto.ca/webdocs/HTMLdocs/NewHTML/iso_table.html)
+
