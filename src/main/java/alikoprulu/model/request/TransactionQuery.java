@@ -38,7 +38,7 @@ public class TransactionQuery {
     private String filterField;
 
     @Size(max = 256)
-    private String filteValue;
+    private String filterValue;
 
     private Integer page;
 
@@ -119,11 +119,11 @@ public class TransactionQuery {
     }
 
     public String getFilteValue() {
-        return filteValue;
+        return filterValue;
     }
 
-    public void setFilteValue(String filteValue) {
-        this.filteValue = filteValue;
+    public void setFilteValue(String filterValue) {
+        this.filterValue = filterValue;
     }
 
     public Integer getPage() {
@@ -146,7 +146,7 @@ public class TransactionQuery {
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", errorCode='" + errorCode + '\'' +
                 ", filterField='" + filterField + '\'' +
-                ", filteValue='" + filteValue + '\'' +
+                ", filteValue='" + filterValue + '\'' +
                 ", page=" + page +
                 '}';
     }
