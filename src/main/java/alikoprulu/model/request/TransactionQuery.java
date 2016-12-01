@@ -1,6 +1,7 @@
 package alikoprulu.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Size;
@@ -8,6 +9,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by Ali on 30.11.2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionQuery {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
