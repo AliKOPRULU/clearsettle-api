@@ -1,6 +1,7 @@
 package alikoprulu.model.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 /**
  * Created by Ali on 30.11.2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerInfo {
 
     private Integer id;

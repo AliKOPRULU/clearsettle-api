@@ -1,6 +1,7 @@
 package alikoprulu.controller;
 
 import alikoprulu.model.request.TransactionQueryRequest;
+import alikoprulu.model.request.TransactionReportRequest;
 import alikoprulu.model.response.TransactionQueryResponse;
 import alikoprulu.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class TransactionController {
     @Autowired
     TransactionService transactionService;
 
-    public Callable<ResponseEntity> transactionQuery(@RequestHeader(value = "Authorization", required = false) String authorization, @Valid TransactionQueryRequest transactionQueryRequest, BindingResult bindingResult) {
+    public Callable<ResponseEntity> transactionQuery(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionQueryRequest transactionQueryRequest, BindingResult bindingResult) {
         if (StringUtils.isEmpty(authorization)) {
             return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
@@ -43,6 +44,16 @@ public class TransactionController {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         };
+    }
+
+    public Callable<ResponseEntity> transactionReport(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionReportRequest transactionReportRequest, BindingResult bindingResult) {
+
+        if (StringUtils.isEmpty(authorization)) {
+            return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        return null;
+
     }
 
 }

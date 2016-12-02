@@ -1,7 +1,9 @@
 package alikoprulu.impl;
 
 import alikoprulu.model.request.TransactionQueryRequest;
+import alikoprulu.model.request.TransactionReportRequest;
 import alikoprulu.model.response.TransactionQueryResponse;
+import alikoprulu.model.response.TransactionReportResponse;
 import alikoprulu.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +30,7 @@ public class TransactionImpl implements TransactionService {
 
     @Override
     public Future<Optional<TransactionQueryResponse>> transactionQuery(TransactionQueryRequest request, String token) {
-        String url = baseUrl + "transaction/list";
+        String url = baseUrl + "transactions/list";
         TransactionQueryResponse transactionQueryResponse = null;
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -42,6 +44,25 @@ public class TransactionImpl implements TransactionService {
 
         } finally {
             return new AsyncResult<>(Optional.ofNullable(transactionQueryResponse));
+        }
+    }
+
+    @Override
+    public Future<Optional<TransactionReportResponse>> transactionReport(TransactionReportRequest request, String token) {
+        String url = baseUrl + "transactions/report";
+
+        TransactionReportResponse transactionReportResponse = null;
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Auth", token);
+
+        HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
+
+        try {
+            transactionReportResponse = restTemplate.postForObject(url, httpEntity, TransactionReportResponse.class);
+        } catch (Exception e) {
+        } finally {
+            return new AsyncResult<>(Optional.ofNullable(transactionReportResponse));
         }
     }
 

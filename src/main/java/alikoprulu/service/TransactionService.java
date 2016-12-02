@@ -1,7 +1,9 @@
 package alikoprulu.service;
 
 import alikoprulu.model.request.TransactionQueryRequest;
+import alikoprulu.model.request.TransactionReportRequest;
 import alikoprulu.model.response.TransactionQueryResponse;
+import alikoprulu.model.response.TransactionReportResponse;
 
 import java.util.Optional;
 import java.util.concurrent.Future;
@@ -12,4 +14,5 @@ import java.util.concurrent.Future;
 public interface TransactionService {
     Future<Optional<TransactionQueryResponse>> transactionQuery(TransactionQueryRequest request, String token);
 
+    Future<Optional<TransactionReportResponse>> transactionReport(TransactionReportRequest request, String token);
 }
