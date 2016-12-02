@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService {
         String url=baseUrl+"/merchant/user/login";
         Token token=null;
 
+        //try catch gerekiyor bakılacak
+
         token=restTemplate.postForObject(url,credetial,Token.class);
 
         return new AsyncResult<>(Optional.ofNullable(token));//ofNullable null kabul eder. İstisna fırlatmaz

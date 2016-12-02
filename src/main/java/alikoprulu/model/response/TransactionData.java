@@ -3,7 +3,7 @@ package alikoprulu.model.response;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class TransactionData {//TransactionQuery -> Response -> data
+public class TransactionData {//TransactionQueryRequest -> Response -> data
 
     private Fx fx;
 

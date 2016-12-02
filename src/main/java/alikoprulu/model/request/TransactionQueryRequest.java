@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * Created by Ali on 30.11.2016.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TransactionQuery {
+public class TransactionQueryRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -44,7 +44,7 @@ public class TransactionQuery {
 
     private Integer page;
 
-    public TransactionQuery(){
+    public TransactionQueryRequest(){
         super();
     }
 
@@ -138,7 +138,7 @@ public class TransactionQuery {
 
     @Override
     public String toString() {
-        return "TransactionQuery{" +
+        return "TransactionQueryRequest{" +
                 "fromDate='" + fromDate + '\'' +
                 ", toDate='" + toDate + '\'' +
                 ", status='" + status + '\'' +
