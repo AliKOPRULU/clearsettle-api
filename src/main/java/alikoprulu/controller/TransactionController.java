@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.concurrent.Future;
 /**
  * Created by Ali on 2.12.2016.
  */
+@RestController
 public class TransactionController {
     @Autowired
     TransactionService transactionService;
@@ -42,4 +44,5 @@ public class TransactionController {
             }
         };
     }
+
 }

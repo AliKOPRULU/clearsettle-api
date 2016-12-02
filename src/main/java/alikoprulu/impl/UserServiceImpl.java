@@ -19,13 +19,11 @@ import java.util.concurrent.Future;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     @Autowired//çalışma zamanında hata vermesin diye otomatik bağlamaya yarıyor
     private RestTemplate restTemplate;//RESTful web servisler için kullanacağız
 
     @Value("${baseUrl}")//Value vaesayılan değer atar, ${baseUrl} application.properties de atadığımız baseUrl değerini yakalar
     private String baseUrl;
-
 
     @Async
     @Override
@@ -33,10 +31,12 @@ public class UserServiceImpl implements UserService {
         String url=baseUrl+"/merchant/user/login";
         Token token=null;
 
-        //try catch gerekiyor bakılacak
+        try {
+            token=restTemplate.postForObject(url,credetial,Token.class);
+        }catch (Exception e){
 
-        token=restTemplate.postForObject(url,credetial,Token.class);
-
-        return new AsyncResult<>(Optional.ofNullable(token));//ofNullable null kabul eder. İstisna fırlatmaz
+        }finally {
+            return new AsyncResult<>(Optional.ofNullable(token));//ofNullable null kabul eder. İstisna fırlatmaz
+        }
     }
 }
