@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class MerchantTransaction {
+public class MerchantTransactions {
 
     private String referenceNo;
 
@@ -20,7 +20,7 @@ public class MerchantTransaction {
 
     private String transactionId;
 
-    public MerchantTransaction(){
+    public MerchantTransactions(){
         super();
     }
 

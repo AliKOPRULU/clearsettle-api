@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     @Autowired//çalışma zamanında hata vermesin diye otomatik bağlamaya yarıyor
     private RestTemplate restTemplate;//RESTful web servisler için kullanacağız
 
-    @Value("${baseUrl}")//Value vaesayılan değer atar, ${baseUrl} application.properties de atadığımız baseUrl değerini yakalar
+    @Value("${baseUrl}")//Value varsayılan değer atar, ${baseUrl} application.properties de atadığımız baseUrl değerini yakalar
     private String baseUrl;
 
     @Async

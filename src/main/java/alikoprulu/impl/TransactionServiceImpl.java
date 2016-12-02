@@ -20,7 +20,7 @@ import java.util.concurrent.Future;
  * Created by Ali on 2.12.2016.
  */
 @Service
-public class TransactionImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -34,7 +34,7 @@ public class TransactionImpl implements TransactionService {
         TransactionQueryResponse transactionQueryResponse = null;
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Auth", token);
+        httpHeaders.set("Authorization", token);
 
         HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
 
@@ -54,7 +54,7 @@ public class TransactionImpl implements TransactionService {
         TransactionReportResponse transactionReportResponse = null;
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Auth", token);
+        httpHeaders.set("Authorization", token);
 
         HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
 

@@ -13,7 +13,7 @@ public class TransactionData {//TransactionQueryRequest -> Response -> data
 
     private Merchant merchant;
 
-    private MerchantTransaction merchantTransaction;
+    private MerchantTransactions merchantTransactions;
 
     public TransactionData(){
         super();
@@ -51,11 +51,11 @@ public class TransactionData {//TransactionQueryRequest -> Response -> data
         this.merchant = merchant;
     }
 
-    public MerchantTransaction getMerchantTransaction() {
-        return merchantTransaction;
+    public MerchantTransactions getMerchantTransactions() {
+        return merchantTransactions;
     }
 
-    public void setMerchantTransaction(MerchantTransaction merchantTransaction) {
-        this.merchantTransaction = merchantTransaction;
+    public void setMerchantTransactions(MerchantTransactions merchantTransactions) {
+        this.merchantTransactions = merchantTransactions;
     }
 }
