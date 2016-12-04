@@ -43,7 +43,7 @@ public class TransactionController {
             Optional<TransactionReportResponse> transactionReportResponse = transactionReportFuture.get();
 
             if (transactionReportResponse.isPresent()) {
-                return new ResponseEntity(transactionReportResponse, HttpStatus.OK);
+                return new ResponseEntity(transactionReportResponse, HttpStatus.OK);//Burası tamam
             } else {
                 return new ResponseEntity(transactionReportResponse, HttpStatus.INTERNAL_SERVER_ERROR);
             }
@@ -65,7 +65,7 @@ public class TransactionController {
             Optional<TransactionQueryResponse> transactionQueryResponse = transactionQueryFuture.get();
 
             if (transactionQueryResponse.isPresent()) {
-                return new ResponseEntity(transactionQueryResponse, HttpStatus.OK);
+                return new ResponseEntity(transactionQueryResponse, HttpStatus.OK);//Burası da  tamam
             } else {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
             }

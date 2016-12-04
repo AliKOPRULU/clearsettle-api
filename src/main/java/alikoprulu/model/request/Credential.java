@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class Credential {//MERCHANT LOGIN
+public class Credential {//MERCHANT LOGIN /merchant/user/login
 
     @Email
     @NotEmpty

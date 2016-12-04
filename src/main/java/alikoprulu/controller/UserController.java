@@ -34,7 +34,7 @@ public class UserController {
             Future<Optional<Token>> loginFuture = userService.login(credential);
             Optional<Token> token = loginFuture.get();
             if (token.isPresent()) {
-                return new ResponseEntity(token.get(), HttpStatus.OK);
+                return new ResponseEntity(token.get(), HttpStatus.OK);//token + status
             } else {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
             }
