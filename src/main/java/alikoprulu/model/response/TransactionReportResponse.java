@@ -1,5 +1,6 @@
 package alikoprulu.model.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.Size;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * Created by Ali on 30.11.2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionReportResponse {
 
     @Size(max = 64)

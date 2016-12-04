@@ -1,9 +1,12 @@
 package alikoprulu.model.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by Ali on 30.11.2016.
  */
-public class AcquirerTransactions {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AcquirerTransactions {//Edinen
 
     private Integer id;
 
@@ -12,6 +15,10 @@ public class AcquirerTransactions {
     private String code;
 
     private String type;
+
+    public AcquirerTransactions() {
+        super();
+    }
 
     public Integer getId() {
         return id;

@@ -23,4 +23,47 @@ public class TransactionReportRequest {//Post parameters
 
     private Integer acquirer;
 
+    public TransactionReportRequest(){super();}
+
+    public String getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(String fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public String getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(String toDate) {
+        this.toDate = toDate;
+    }
+
+    public Integer getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Integer merchant) {
+        this.merchant = merchant;
+    }
+
+    public Integer getAcquirer() {
+        return acquirer;
+    }
+
+    public void setAcquirer(Integer acquirer) {
+        this.acquirer = acquirer;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionReportRequest{" +
+                "fromDate='" + fromDate + '\'' +
+                ", toDate='" + toDate + '\'' +
+                ", merchant=" + merchant +
+                ", acquirer=" + acquirer +
+                '}';
+    }
 }

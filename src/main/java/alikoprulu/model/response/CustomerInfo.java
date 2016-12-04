@@ -41,7 +41,7 @@ public class CustomerInfo {
     private String email;
 
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private String birtday;
+    private String birthday;
 
     private String gender;
 
@@ -69,7 +69,7 @@ public class CustomerInfo {
 
     private String billingFax;
 
-    private String shippingtitle;
+    private String shippingTitle;
 
     private String shippingFirstName;
 
@@ -186,11 +186,11 @@ public class CustomerInfo {
     }
 
     public String getBirtday() {
-        return birtday;
+        return birthday;
     }
 
     public void setBirtday(String birtday) {
-        this.birtday = birtday;
+        this.birthday = birtday;
     }
 
     public String getGender() {
@@ -298,11 +298,11 @@ public class CustomerInfo {
     }
 
     public String getShippingtitle() {
-        return shippingtitle;
+        return shippingTitle;
     }
 
     public void setShippingtitle(String shippingtitle) {
-        this.shippingtitle = shippingtitle;
+        this.shippingTitle = shippingtitle;
     }
 
     public String getShippingFirstName() {

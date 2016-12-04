@@ -1,10 +1,13 @@
 package alikoprulu.model.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.validation.constraints.Size;
 
 /**
  * Created by Ali on 30.11.2016.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TransactionReport {//Response parameters -> ResponseList
 
     private Integer count;
