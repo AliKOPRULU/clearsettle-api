@@ -14,11 +14,11 @@ import org.springframework.web.client.RestTemplate;
 public class LibTest {
 
     public static String myTokenGet(String url,RestTemplate restTemplate, String email, String password) {
-        String myUrl =url;
         Credential credential = new Credential();
         credential.setEmail(email);
         credential.setPassword(password);
-        Token token = restTemplate.postForObject(myUrl, credential, Token.class);
+
+        Token token = restTemplate.postForObject(url, credential, Token.class);
         return token.getToken();
     }
 

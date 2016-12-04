@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
 
-import static alikoprulu.controller.LibTest.myTokenGet;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
@@ -51,11 +50,13 @@ public class TransactionControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
-
     @Before
     public void setUp() throws Exception {
 
+    }
+
+    private String myTokenGet() {
+        return LibTest.myTokenGet(baseUrl + merchantLoginUrl, restTemplate, email, password);
     }
 
     @Test
@@ -97,7 +98,7 @@ public class TransactionControllerTest {
     @Test
     public void transactionQueryValidAuthReturnTransactions() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
-                .header("Authorization", myTokenGet(baseUrl + merchantLoginUrl,restTemplate,email,password)))
+                .header("Authorization", myTokenGet()))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
@@ -110,11 +111,6 @@ public class TransactionControllerTest {
     }
 
 //----------------------------------------------------------------------------------------------------------------------
-
-    @Test
-    public void transactionReport() throws Exception {
-
-    }
 
     @Test
     public void transactionReportWithEmptyAuthHeaderShouldReturnAuthError() throws Exception {
@@ -155,7 +151,7 @@ public class TransactionControllerTest {
     @Test
     public void transactionReportValidAuthReturnTransactions() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
-                .header("Authorization", myTokenGet(baseUrl + merchantLoginUrl,restTemplate,email,password)))
+                .header("Authorization", myTokenGet()))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 

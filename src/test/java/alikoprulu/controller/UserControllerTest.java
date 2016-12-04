@@ -41,6 +41,9 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
     @InjectMocks
     private UserController userController;
 
+    @Value("${baseUrl}")
+    private String baseUrl;
+
     @Value("${email}")
     private String email;
 
@@ -54,7 +57,6 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
 
     @Test
     public void loginWithNoParamShouldReturnErrors() throws Exception {
-
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
