@@ -13,9 +13,9 @@ apply plugin: "io.ratpack.ratpack-groovy"
 apply plugin: "spring-boot"
 apply plugin: "java"
 
-jar {
-  baseName = 'gs-securing-web'
-  version =  '0.1.0'
+jar {//old name gs-securing-web
+  baseName = 'clearsettle-reporting-api'
+  version =  '0.0.1'
 }
 
 repositories {

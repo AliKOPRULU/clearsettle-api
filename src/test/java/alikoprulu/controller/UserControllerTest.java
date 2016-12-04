@@ -141,10 +141,10 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
     }
 
     @Test
-    public void loginWithWrongPasswordReturnError()throws Exception{
-        MvcResult mvcResult= (MvcResult) this.mockMvc.perform(post(url)
-        .param("email",email)
-        .param("password","invalid"))
+    public void loginWithWrongPasswordReturnError() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url)
+                .param("email", email)
+                .param("password", "invalid"))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
@@ -152,9 +152,9 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.error").isNotEmpty())
                 .andExpect(jsonPath("$.error").isArray())
-                .andExpect(jsonPath("$.error",hasSize(1)))
+                .andExpect(jsonPath("$.error", hasSize(1)))
                 .andExpect(jsonPath("$.error[0].message").isNotEmpty())
-                .andExpect(jsonPath("$.error[0].field",is("Password")));
+                .andExpect(jsonPath("$.error[0].field", is("Password")));
     }
 
 }
