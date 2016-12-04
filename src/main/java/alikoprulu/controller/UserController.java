@@ -1,6 +1,6 @@
 package alikoprulu.controller;
 
-import alikoprulu.model.request.Credetial;
+import alikoprulu.model.request.Credential;
 import alikoprulu.model.response.Token;
 import alikoprulu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +25,10 @@ public class UserController {
     UserService userService;
 
     @PostMapping(value = "/login")
-    public Callable<ResponseEntity> login(@Valid Credetial credetial, BindingResult bindingResult) {//void -> Runnable and return-> Callable
+    public Callable<ResponseEntity> login(@Valid Credential credential, BindingResult bindingResult) {//void -> Runnable and return-> Callable
 
         return () -> {
-            Future<Optional<Token>> loginFuture = userService.login(credetial);
+            Future<Optional<Token>> loginFuture = userService.login(credential);
             Optional<Token> token = loginFuture.get();
             if (token.isPresent()) {
                 return new ResponseEntity(token.get(), HttpStatus.OK);

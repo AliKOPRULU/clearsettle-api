@@ -1,6 +1,6 @@
 package alikoprulu.impl;
 
-import alikoprulu.model.request.Credetial;
+import alikoprulu.model.request.Credential;
 import alikoprulu.model.response.Token;
 import alikoprulu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
 
     @Async
     @Override
-    public Future<Optional<Token>> login(Credetial credetial) {
+    public Future<Optional<Token>> login(Credential credential) {
         String url=baseUrl+"/merchant/user/login";
         Token token=null;
 
         try {
-            token=restTemplate.postForObject(url,credetial,Token.class);
+            token=restTemplate.postForObject(url,credential,Token.class);
         }catch (Exception e){
 
         }finally {

@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 /**
  * Created by Ali on 30.11.2016.
  */
-public class Credetial {//MERCHANT LOGIN
+public class Credential {//MERCHANT LOGIN
 
     @Email
     @NotEmpty
@@ -18,7 +18,7 @@ public class Credetial {//MERCHANT LOGIN
     @Size(max = 32)
     private String password;
 
-    public Credetial() {
+    public Credential() {
         super();
     }
 
@@ -40,7 +40,7 @@ public class Credetial {//MERCHANT LOGIN
 
     @Override
     public String toString() {
-        return "Credetial{" +
+        return "Credential{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
