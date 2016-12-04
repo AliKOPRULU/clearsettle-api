@@ -30,7 +30,7 @@ Characters :
 
 - [ISO 8859-1](http://sites.utoronto.ca/webdocs/HTMLdocs/NewHTML/iso_table.html)
 
-#Look private static final Logger logger = LoggerFactory.getLogger
+###Look - private static final Logger logger = LoggerFactory.getLogger
 
 - [Asynchronous Methods](https://spring.io/guides/gs/async-method/)
 

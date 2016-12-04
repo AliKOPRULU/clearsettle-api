@@ -106,7 +106,7 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
     @Test
     public void loginWithInvalidEmailShouldReturnError() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url)
-                .param("email", "invalid")
+                .param("email", "ERROR")
                 .param("password", password))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));

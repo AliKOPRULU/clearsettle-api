@@ -68,7 +68,8 @@ public class TransactionControllerTest {
 
     @Test
     public void transactionQueryWithEmptyAuthHeaderShouldReturnAuthError() throws Exception {
-        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl).header("Authorization",""))
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
+                .header("Authorization", ""))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
@@ -78,31 +79,100 @@ public class TransactionControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.error").isNotEmpty())
                 .andExpect(jsonPath("$.error").isArray())
-                .andExpect(jsonPath("$.error", hasSize(1)));
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error.message").isNotEmpty());
     }
 
     @Test
-    public void transactionQueryInvalidAuthShouldReturnAuthError() throws Exception {//Token is valid for 10 minutes
+    public void transactionQueryInvalidAuthShouldReturnDECLINED() throws Exception {//Token is valid for 10 minutes
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
+                .header("Authorization", "DECLINED")
+                .param("fromDate", "2015-07-01")
+                .param("toDate", "2015-10-01"))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
-
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().is5xxServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error.message").isNotEmpty());
     }
 
     @Test
-    public void transactionQuery2() throws Exception {
+    public void transactionQueryValidAuthReturnTransactions() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
+                .header("Authorization", getToken(baseUrl + merhantLoginUrl)))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("response").isNotEmpty())//response ?
+                .andExpect(jsonPath("response").isArray());//response ?
     }
-
-    @Test
-    public void transactionQuery3() throws Exception {
-
-    }
-
 
 //----------------------------------------------------------------------------------------------------------------------
 
     @Test
     public void transactionReport() throws Exception {
 
+    }
+
+    @Test
+    public void transactionReportWithEmptyAuthHeaderShouldReturnAuthError() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
+                .header("Authorization", ""))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error.message").isNotEmpty());
+    }
+
+    @Test
+    public void transactionReportInvalidAuthShouldReturnDECLINED() throws Exception {//Token is valid for 10 minutes
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
+                .header("Authorization", "DECLINED")
+                .param("fromDate", "2015-07-01")
+                .param("toDate", "2015-10-01"))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().is5xxServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error.message").isNotEmpty());
+    }
+
+    @Test
+    public void transactionReportValidAuthReturnTransactions() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
+                .header("Authorization", getToken(baseUrl + merhantLoginUrl)))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("response").isNotEmpty())//response ?
+                .andExpect(jsonPath("response").isArray());//response ?
     }
 
 }
