@@ -2,8 +2,10 @@ package alikoprulu.controller;
 
 import alikoprulu.model.request.TransactionQueryRequest;
 import alikoprulu.model.request.TransactionReportRequest;
+import alikoprulu.model.request.TransactionRequest;
 import alikoprulu.model.response.TransactionQueryResponse;
 import alikoprulu.model.response.TransactionReportResponse;
+import alikoprulu.model.response.TransactionResponse;
 import alikoprulu.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +68,28 @@ public class TransactionController {
 
             if (transactionQueryResponse.isPresent()) {
                 return new ResponseEntity(transactionQueryResponse, HttpStatus.OK);//Burası da  tamam
+            } else {
+                return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        };
+    }
+
+    @PostMapping(value = "transaction")
+    public Callable<ResponseEntity> transaction(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionRequest transactionRequest, BindingResult bindingResult) {
+        if (StringUtils.isEmpty(authorization)) {
+            return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return () -> new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return () -> {
+            Future<Optional<TransactionResponse>> transactionFuture = transactionService.transaction(transactionRequest, authorization);
+            Optional<TransactionResponse> transactionResponse = transactionFuture.get();
+
+            if (transactionResponse.isPresent()) {
+                return new ResponseEntity(transactionResponse, HttpStatus.OK);//Burası da  tamam
             } else {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
             }

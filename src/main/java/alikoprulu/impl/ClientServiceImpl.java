@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -26,6 +27,7 @@ public class ClientServiceImpl implements ClientService {
     @Value("${baseUrl}")
     private String baseUrl;
 
+    @Async
     @Override
     public Future<Optional<ClientResponse>> getClient(ClientRequest clientRequest, String token) {
         String url = baseUrl + "/client";

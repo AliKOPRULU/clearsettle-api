@@ -2,13 +2,16 @@ package alikoprulu.impl;
 
 import alikoprulu.model.request.TransactionQueryRequest;
 import alikoprulu.model.request.TransactionReportRequest;
+import alikoprulu.model.request.TransactionRequest;
 import alikoprulu.model.response.TransactionQueryResponse;
 import alikoprulu.model.response.TransactionReportResponse;
+import alikoprulu.model.response.TransactionResponse;
 import alikoprulu.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Value("${baseUrl}")
     private String baseUrl;
 
+    @Async
     @Override
     public Future<Optional<TransactionReportResponse>> transactionReport(TransactionReportRequest request, String token) {
         String url = baseUrl + "transactions/report";
@@ -47,6 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
         }
     }
 
+    @Async
     @Override
     public Future<Optional<TransactionQueryResponse>> transactionQuery(TransactionQueryRequest request, String token) {
         String url = baseUrl + "transactions/list";
@@ -63,6 +68,26 @@ public class TransactionServiceImpl implements TransactionService {
 
         } finally {
             return new AsyncResult<>(Optional.ofNullable(transactionQueryResponse));
+        }
+    }
+
+    @Async
+    @Override
+    public Future<Optional<TransactionResponse>> transaction(TransactionRequest request, String token) {
+        String url = baseUrl + "transaction";
+        TransactionResponse transactionResponse = null;
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", token);
+
+        HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
+
+        try {
+            transactionResponse = restTemplate.postForObject(url, httpEntity, TransactionResponse.class);
+        } catch (Exception e) {
+
+        } finally {
+            return new AsyncResult<>(Optional.ofNullable(transactionResponse));
         }
     }
 
