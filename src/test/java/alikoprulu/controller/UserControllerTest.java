@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -50,7 +49,7 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);//Mockito annotasyon every test execute
+        //MockitoAnnotations.initMocks(this);//Mockito annotasyon every test execute
     }
 
     @Test

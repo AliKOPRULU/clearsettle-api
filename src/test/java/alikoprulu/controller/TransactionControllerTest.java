@@ -59,7 +59,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    public void transactionQueryWithEmptyAuthHeaderShouldReturnAuthError() throws Exception {
+    public void transactionQueryWithEmptyAuthHeaderShouldReturnError() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
                 .header("Authorization", ""))
                 .andExpect(request().asyncStarted())
@@ -76,7 +76,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    public void transactionQueryInvalidAuthShouldReturnDECLINED() throws Exception {//Token is valid for 10 minutes
+    public void transactionQueryInvalidAuthShouldReturnError() throws Exception {//Token is valid for 10 minutes
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
                 .header("Authorization", "DECLINED")
                 .param("fromDate", "2015-07-01")
@@ -134,7 +134,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    public void transactionReportInvalidAuthShouldReturnDECLINED() throws Exception {//Token is valid for 10 minutes
+    public void transactionReportInvalidAuthShouldReturnError() throws Exception {//Token is valid for 10 minutes
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
                 .header("Authorization", "DECLINED")
                 .param("fromDate", "2015-07-01")

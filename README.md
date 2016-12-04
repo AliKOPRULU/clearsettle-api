@@ -7,7 +7,6 @@
 -GET CLIENT
 -GET MERCHANT
 
-
 *Interface Future<V> : A Future represents the result of an asynchronous computation.
 *Class Optional<T> : A container object which may or may not contain a non-null value.
 *Stream() : A container object which may or may not contain a non-null value. If a value is present, isPresent() will return true and get() will return the value. 
@@ -33,6 +32,10 @@ Characters :
 ###Look - private static final Logger logger = LoggerFactory.getLogger
 
 - [Asynchronous Methods](https://spring.io/guides/gs/async-method/)
+
+##Unchecked
+
+-  All the request are logged on the Clearsettle side. 
 
 ##Not:
 TransactionQuery:Parametre Detayları; status, operation, paymentMethod, errorCode, filterField, Enum kullanılabilirdi yalnız, verilenler tamamı mı bilinmiyor, Char limit 8-10 kat fazla, şimdilik pas geçildi. 
