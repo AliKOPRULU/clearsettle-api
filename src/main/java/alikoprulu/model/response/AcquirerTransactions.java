@@ -1,6 +1,7 @@
 package alikoprulu.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by Ali on 30.11.2016.
@@ -8,47 +9,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AcquirerTransactions {//Edinen
 
-    private Integer id;
+    @JsonProperty("acquirerTransaction")
+    Acquirer acquirer;
 
-    private String name;
+    public AcquirerTransactions(){super();}
 
-    private String code;
-
-    private String type;
-
-    public AcquirerTransactions() {
-        super();
+    public Acquirer getAcquirer() {
+        return acquirer;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setAcquirer(Acquirer acquirer) {
+        this.acquirer = acquirer;
     }
 }

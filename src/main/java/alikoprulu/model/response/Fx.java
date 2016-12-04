@@ -1,6 +1,7 @@
 package alikoprulu.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by Ali on 30.11.2016.
@@ -8,11 +9,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Fx {//Foreign Exchange  USD | TL
 
-    //Dizi olacak burası değişecek
+    @JsonProperty("merchant")
+    FxMerchant fxMerchant;
 
-    private String originalAmount;
+    public Fx(){super();}
 
-    private String originalCurrency;
+    public FxMerchant getFxMerchant() {
+        return fxMerchant;
+    }
 
-
+    public void setFxMerchant(FxMerchant fxMerchant) {
+        this.fxMerchant = fxMerchant;
+    }
 }

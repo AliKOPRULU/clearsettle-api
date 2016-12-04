@@ -29,25 +29,6 @@ public class TransactionServiceImpl implements TransactionService {
     private String baseUrl;
 
     @Override
-    public Future<Optional<TransactionQueryResponse>> transactionQuery(TransactionQueryRequest request, String token) {
-        String url = baseUrl + "transactions/list";
-        TransactionQueryResponse transactionQueryResponse = null;
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", token);
-
-        HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
-
-        try {
-            transactionQueryResponse = restTemplate.postForObject(url, httpEntity, TransactionQueryResponse.class);
-        } catch (Exception e) {
-
-        } finally {
-            return new AsyncResult<>(Optional.ofNullable(transactionQueryResponse));
-        }
-    }
-
-    @Override
     public Future<Optional<TransactionReportResponse>> transactionReport(TransactionReportRequest request, String token) {
         String url = baseUrl + "transactions/report";
 
@@ -63,6 +44,25 @@ public class TransactionServiceImpl implements TransactionService {
         } catch (Exception e) {
         } finally {
             return new AsyncResult<>(Optional.ofNullable(transactionReportResponse));
+        }
+    }
+
+    @Override
+    public Future<Optional<TransactionQueryResponse>> transactionQuery(TransactionQueryRequest request, String token) {
+        String url = baseUrl + "transactions/list";
+        TransactionQueryResponse transactionQueryResponse = null;
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Authorization", token);
+
+        HttpEntity httpEntity = new HttpEntity<>(request, httpHeaders);
+
+        try {
+            transactionQueryResponse = restTemplate.postForObject(url, httpEntity, TransactionQueryResponse.class);
+        } catch (Exception e) {
+
+        } finally {
+            return new AsyncResult<>(Optional.ofNullable(transactionQueryResponse));
         }
     }
 

@@ -29,6 +29,28 @@ public class TransactionController {
     TransactionService transactionService;
 
     @PostMapping(value = "/transactions/report")
+    public Callable<ResponseEntity> transactionReport(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionReportRequest transactionReportRequest, BindingResult bindingResult) {
+        if (StringUtils.isEmpty(authorization)) {
+            return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return () -> new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return () -> {
+            Future<Optional<TransactionReportResponse>> transactionReportFuture = transactionService.transactionReport(transactionReportRequest, authorization);
+            Optional<TransactionReportResponse> transactionReportResponse = transactionReportFuture.get();
+
+            if (transactionReportResponse.isPresent()) {
+                return new ResponseEntity(transactionReportResponse, HttpStatus.OK);
+            } else {
+                return new ResponseEntity(transactionReportResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+        };
+    }
+
+    @PostMapping(value = "transactions/list")
     public Callable<ResponseEntity> transactionQuery(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionQueryRequest transactionQueryRequest, BindingResult bindingResult) {
         if (StringUtils.isEmpty(authorization)) {
             return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
@@ -46,29 +68,6 @@ public class TransactionController {
                 return new ResponseEntity(transactionQueryResponse, HttpStatus.OK);
             } else {
                 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        };
-    }
-
-    @PostMapping(value = "transactions/list")
-    public Callable<ResponseEntity> transactionReport(@RequestHeader(value = "Authorization", required = true) String authorization, @Valid TransactionReportRequest transactionReportRequest, BindingResult bindingResult) {
-
-        if (StringUtils.isEmpty(authorization)) {
-            return () -> new ResponseEntity(HttpStatus.UNAUTHORIZED);
-        }
-
-        if (bindingResult.hasErrors()) {
-            return () -> new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return () -> {
-            Future<Optional<TransactionReportResponse>> transactionReportFuture = transactionService.transactionReport(transactionReportRequest, authorization);
-            Optional<TransactionReportResponse> transactionReportResponse = transactionReportFuture.get();
-
-            if (transactionReportResponse.isPresent()) {
-                return new ResponseEntity(transactionReportResponse, HttpStatus.OK);
-            } else {
-                return new ResponseEntity(transactionReportResponse, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         };
     }

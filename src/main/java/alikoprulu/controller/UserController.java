@@ -26,6 +26,9 @@ public class UserController {
 
     @PostMapping(value = "/login")
     public Callable<ResponseEntity> login(@Valid Credential credential, BindingResult bindingResult) {//void -> Runnable and return-> Callable
+        if (bindingResult.hasErrors()) {
+            return () -> new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return () -> {
             Future<Optional<Token>> loginFuture = userService.login(credential);
