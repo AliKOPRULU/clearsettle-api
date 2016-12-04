@@ -1,7 +1,5 @@
 package alikoprulu.controller;
 
-import alikoprulu.model.request.Credential;
-import alikoprulu.model.response.Token;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.client.RestTemplate;
 
+import static alikoprulu.controller.LibTest.myTokenGet;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
@@ -35,7 +34,7 @@ public class TransactionControllerTest {
 
     private String reportUrl = "/transactions/report";
 
-    private String merhantLoginUrl = "/merchant/user/login";
+    private String merchantLoginUrl = "/merchant/user/login";
 
     @Value("${baseUrl}")
     private String baseUrl;
@@ -52,14 +51,7 @@ public class TransactionControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private String getToken(String url) {
-        String myUrl = baseUrl + url;
-        Credential credential = new Credential();
-        credential.setEmail(email);
-        credential.setPassword(password);
-        Token token = restTemplate.postForObject(myUrl, credential, Token.class);
-        return token.getToken();
-    }
+
 
     @Before
     public void setUp() throws Exception {
@@ -105,7 +97,7 @@ public class TransactionControllerTest {
     @Test
     public void transactionQueryValidAuthReturnTransactions() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + queryUrl)
-                .header("Authorization", getToken(baseUrl + merhantLoginUrl)))
+                .header("Authorization", myTokenGet(baseUrl + merchantLoginUrl,restTemplate,email,password)))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
@@ -163,7 +155,7 @@ public class TransactionControllerTest {
     @Test
     public void transactionReportValidAuthReturnTransactions() throws Exception {
         MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(baseUrl + reportUrl)
-                .header("Authorization", getToken(baseUrl + merhantLoginUrl)))
+                .header("Authorization", myTokenGet(baseUrl + merchantLoginUrl,restTemplate,email,password)))
                 .andExpect(request().asyncStarted())
                 .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 

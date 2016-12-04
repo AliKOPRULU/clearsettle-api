@@ -1,7 +1,5 @@
 package alikoprulu.controller;
 
-import alikoprulu.model.request.Credential;
-import alikoprulu.model.response.Token;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +33,7 @@ public class ClientControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private String getToken(String url) {
-        String myUrl = baseUrl + url;
-        Credential credential = new Credential();
-        credential.setEmail(email);
-        credential.setPassword(password);
-        Token token = restTemplate.postForObject(myUrl, credential, Token.class);
-        return token.getToken();
-    }
+
 
     @Before
     public void setUp() throws Exception {
