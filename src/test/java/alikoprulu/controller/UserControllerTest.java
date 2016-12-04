@@ -14,9 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class UserControllerTest {//https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/
     //second ---- http://docs.spring.io/spring-security/site/docs/current/reference/html/test-mockmvc.html
+    //http://docs.spring.io/spring-security/site/docs/current/reference/html/test-mockmvc.html
 
     private String url = "/login";
 
@@ -47,7 +50,7 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);//Mockito annotasyonlarının çalışması için kullanılıyor
+        MockitoAnnotations.initMocks(this);//Mockito annotasyon every test execute
     }
 
     @Test
@@ -64,7 +67,6 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
                 .andExpect(jsonPath("$.error").isNotEmpty())
                 .andExpect(jsonPath("$.error").isArray())
                 .andExpect(jsonPath("$.error", hasSize(1)));
-
     }
 
     @Test
@@ -83,9 +85,76 @@ public class UserControllerTest {//https://www.petrikainulainen.net/programming/
     }
 
     @Test
-    public void loginWithInvalidEmailShouldReturnError() throws Exception {
+    public void loginWithEmptyEmailShouldReturnError() throws Exception {//like no param
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url)
+                .param("email", "")
+                .param("password", password))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
 
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andExpect((ResultMatcher) print())
+                .andExpect(status().is5xxServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error[0].message").isNotEmpty())
+                .andExpect(jsonPath("$.error[0].field", is("Email")));
     }
 
+    @Test
+    public void loginWithInvalidEmailShouldReturnError() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url)
+                .param("email", "invalid")
+                .param("password", password))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andExpect((ResultMatcher) print())
+                .andExpect(status().is5xxServerError())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error[0].message").isNotEmpty())
+                .andExpect(jsonPath("$.error[0].field", is("Email")));
+    }
+
+    @Test
+    public void loginWithEmptyPasswordReturnError() throws Exception {
+        MvcResult mvcResult = (MvcResult) this.mockMvc.perform(post(url)
+                .param("email", email)
+                .param("password", ""))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andExpect((ResultMatcher) print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error", hasSize(1)))
+                .andExpect(jsonPath("$.error[0].message").isNotEmpty())
+                .andExpect(jsonPath("$.error[0].field", is("Password")));
+    }
+
+    @Test
+    public void loginWithWrongPasswordReturnError()throws Exception{
+        MvcResult mvcResult= (MvcResult) this.mockMvc.perform(post(url)
+        .param("email",email)
+        .param("password","invalid"))
+                .andExpect(request().asyncStarted())
+                .andExpect(request().asyncResult(instanceOf(ResponseEntity.class)));
+
+        this.mockMvc.perform(asyncDispatch(mvcResult))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.error").isNotEmpty())
+                .andExpect(jsonPath("$.error").isArray())
+                .andExpect(jsonPath("$.error",hasSize(1)))
+                .andExpect(jsonPath("$.error[0].message").isNotEmpty())
+                .andExpect(jsonPath("$.error[0].field",is("Password")));
+    }
 
 }
