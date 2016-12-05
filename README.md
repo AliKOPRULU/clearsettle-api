@@ -41,3 +41,19 @@ Characters :
 TransactionQuery:Parametre Detayları; status, operation, paymentMethod, errorCode, filterField, Enum kullanılabilirdi yalnız, verilenler tamamı mı bilinmiyor, Char limit 8-10 kat fazla, şimdilik pas geçildi. 
 -Testde kullanılabilir öğren.  
 
+Useful links:https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/
+
+http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
+
+http://www.bahadirakin.com/mockito-ilk-adimlar/
+
+http://www.bahadirakin.com/test-yazarken-uyulmasi-gereken-7-kural/
+
+----
+https://travis-ci.org
+heroku.com
+https://www.versioneye.com
+
+-----
+https://bintray.com/bintray/jcenter
+
